@@ -1,0 +1,257 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * VOXZI™ design system — matte black + silver.
+ * All colors in oklch. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-silver: var(--silver);
+  --color-platinum: var(--platinum);
+  --color-charcoal: var(--charcoal);
+  --color-onyx: var(--onyx);
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  --background: oklch(0.14 0 0);
+  --foreground: oklch(0.94 0 0);
+  --onyx: oklch(0.11 0 0);
+  --charcoal: oklch(0.2 0 0);
+  --silver: oklch(0.78 0.006 260);
+  --platinum: oklch(0.9 0.004 260);
+
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.94 0 0);
+  --popover: oklch(0.17 0 0);
+  --popover-foreground: oklch(0.94 0 0);
+  --primary: oklch(0.86 0.005 260);
+  --primary-foreground: oklch(0.13 0 0);
+  --secondary: oklch(0.24 0 0);
+  --secondary-foreground: oklch(0.92 0 0);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.66 0.004 260);
+  --accent: oklch(0.26 0 0);
+  --accent-foreground: oklch(0.95 0 0);
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(0.97 0 0);
+  --border: oklch(0.32 0.003 260 / 55%);
+  --input: oklch(0.3 0 0);
+  --ring: oklch(0.72 0.005 260);
+
+  --gradient-silver: linear-gradient(
+    135deg,
+    oklch(0.98 0 0) 0%,
+    oklch(0.74 0.005 260) 38%,
+    oklch(0.55 0.005 260) 58%,
+    oklch(0.95 0 0) 100%
+  );
+  --gradient-surface: linear-gradient(
+    160deg,
+    oklch(0.22 0 0) 0%,
+    oklch(0.15 0 0) 60%,
+    oklch(0.12 0 0) 100%
+  );
+  --glow-silver: 0 0 60px -12px oklch(0.85 0.005 260 / 35%);
+  --shadow-elevated: 0 30px 80px -40px oklch(0 0 0 / 90%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--silver);
+    color: var(--onyx);
+  }
+}
+
+@utility grid-bg {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px);
+  background-size: 88px 88px;
+}
+
+@utility text-metal {
+  background-image: var(--gradient-silver);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility surface-glass {
+  background-image: var(--gradient-surface);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(14px);
+}
+
+@utility hairline {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(0.8 0.005 260 / 45%),
+    transparent
+  );
+}
+
+@utility glow-soft {
+  box-shadow: var(--glow-silver);
+}
+
+@utility sweep {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%);
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      oklch(1 0 0 / 10%) 50%,
+      transparent 80%
+    );
+    transition: transform 0.9s ease;
+    pointer-events: none;
+  }
+  &:hover::after {
+    transform: translateX(120%);
+  }
+}
+
+@utility grain {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: radial-gradient(
+      oklch(1 0 0 / 70%) 0.5px,
+      transparent 0.5px
+    );
+    background-size: 3px 3px;
+  }
+}
+
+@keyframes card-spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes voxzi-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.15;
+  }
+}
+
+@keyframes voxzi-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes voxzi-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@utility animate-pulse-ring {
+  animation: voxzi-pulse 3.4s ease-in-out infinite;
+}
+
+@utility animate-float {
+  animation: voxzi-float 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@utility wave-bar {
+  height: var(--bar-h, 20%);
+}
+
+.wave-bar[data-active="true"] {
+  animation: voxzi-pulse var(--bar-dur, 1.4s) ease-in-out var(--bar-delay, 0s) infinite;
+}
